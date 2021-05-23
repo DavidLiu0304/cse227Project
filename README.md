@@ -2,7 +2,7 @@
 
 This branch shows an example of using emscripten without the javascript glue.
 
-It may not folow "best practices", but may be what all we have to work with for now.
+It may not folow "best practices", but may be all we have to work with for now.
 
 The trick here is to compile the code into a dynamic library in WASM, which can the be instantiated as a module (at least i think that's what is happening!).
 
