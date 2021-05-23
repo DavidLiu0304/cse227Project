@@ -1,0 +1,56 @@
+<html>
+<head>
+  <title>emscripten without js glue</title>
+
+  <script type="application/javascript" src="./load-wasm.js">
+    // function which loads a WebAssembly dynamic library,
+    //  returns an instance.
+    // compile with:
+    // emcc arithmetic.c -Os -s WASM=1 -s SIDE_MODULE=1
+    //    -s EXPORTED_FUNCTIONS=doubler,incrementer -o arithmetic.wasm
+  </script>
+  <script>
+
+    // global variable to be modified by a wasm function
+    var input = 0;
+
+    // Main part of this example, loads the module and uses it.
+    loadWasm('arithmetic.wasm')
+      .then(instance_0 => {
+        var exports = instance_0.exports; // the exports of that instance
+        var doubler = exports.doubler; // the "doubler" function
+
+        // set up event for button 0
+        var button = document.getElementById('b0');
+        button.value = 'Call the "double" method in a WebAssembly module';
+        button.addEventListener('click', function() {
+          input = doubler(input);
+          console.log(input);
+        }, false);
+      }
+    );
+
+    // module instance #2
+    loadWasm('arithmetic.wasm')
+      .then(instance_1 => {
+        var exports = instance_1.exports; // the exports of that instance
+        var incrementer = exports.incrementer; // the "adder" function
+
+        // set up event for button 1
+        var button = document.getElementById('b1');
+        button.value = 'Call the "increment" method in a WebAssembly module';
+        button.addEventListener('click', function() {
+          input = incrementer(input);
+          console.log(input);
+        }, false);
+      }
+    );
+
+
+  </script>
+</head>
+<body>
+  <input type="button" id="b0" value="(waiting for WebAssembly)"/>
+  <input type="button" id="b1" value="(waiting for WebAssembly)"/>
+</body>
+</html>
