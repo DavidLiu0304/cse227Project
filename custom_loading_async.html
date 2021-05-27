@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>Custom Loading</title>
+  </head>
+  <body>
+    <h1>Custom Loading JS Glue - Async Sleep</h1>
+
+    <canvas id="c0" width="255", height="255",
+    style="cursor: default;"></canvas>
+    <canvas id="c1" width="255", height="255",
+    style="cursor: default;"></canvas>
+    <canvas id="canvas"></canvas>
+
+    <script type="application/javascript" src="blue_red.js"></script>
+    <script type="application/javascript" src="green_yellow_async.js"></script>
+    <script type="application/javascript">
+      blue_red_0({
+        canvas: (() => document.getElementById('c0'))(),
+      })
+      .then(() => {
+        console.log('loaded!');
+      });
+      </script>
+
+    <script type="application/javascript">
+      green_yellow_async({
+        canvas: (() => document.getElementById('c1'))(),
+      })
+      .then(() => {
+        console.log('loaded!');
+      });
+      </script>
+  </body>
+</html>
