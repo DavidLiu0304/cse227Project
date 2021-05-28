@@ -1,3 +1,7 @@
+/****
+ * Setup for metering 
+ */
+
 const fs = require('fs')
 const metering = require('wasm-metering')
 
@@ -5,6 +9,8 @@ const wasm = fs.readFileSync('green_yellow_async.wasm')
 const meteredWasm = metering.meterWASM(wasm, {
   meterType: 'i32'
 })
+
+/******** */
 
 var green_yellow_async = (function() {
   var _scriptDir = typeof document !== 'undefined' && document.currentScript ? document.currentScript.src : undefined;
@@ -7132,13 +7138,16 @@ var green_yellow_async = (function() {
                   return -1
               }
           }
-
+          
           function _emscripten_sleep(gas, gasUsed, limit) {
-              // Asyncify.handleSleep(function(wakeUp) {
-              // Browser.safeSetTimeout(wakeUp, ms)
-              // })
-              
-              const instance = WebAssembly.Instance(mod, {
+              return; //metering_inst;
+          }
+
+          function _emscripten_thread_sleep(/*msecs*/) {
+            // meter instead of spin
+            const limit = 90000000 //msecs
+            let gasUsed = 0
+            const metering_inst = WebAssembly.Instance(mod, {
                 'metering': {
                   'usegas': (gas) => {
                     gasUsed += gas
@@ -7148,15 +7157,13 @@ var green_yellow_async = (function() {
                   }
                 }
               })
-          }
 
-          function _emscripten_thread_sleep(msecs) {
-              const limit = msecs //90000000
-              let gasUsed = 0
-
+              
+              /*
               const mod = WebAssembly.Module(meteredWasm.module)
               var start = _emscripten_get_now();
               while (_emscripten_get_now() - start < msecs) {}
+              */
           }
           var ENV = {};
 
@@ -8016,6 +8023,8 @@ else if (typeof define === 'function' && define['amd'])
 else if (typeof exports === 'object')
   exports["green_yellow_async"] = green_yellow_async;
 
+
+/*
 const fs = require('fs')
 const metering = require('wasm-metering')
 
@@ -8038,3 +8047,4 @@ const instance = WebAssembly.Instance(mod, {
     }
     }
 })
+*/
