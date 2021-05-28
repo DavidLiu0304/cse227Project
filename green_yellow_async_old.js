@@ -1,11 +1,11 @@
-var green_yellow_busy = (function() {
+var green_yellow_async = (function() {
   var _scriptDir = typeof document !== 'undefined' && document.currentScript ? document.currentScript.src : undefined;
   if (typeof __filename !== 'undefined') _scriptDir = _scriptDir || __filename;
   return (
-      function(green_yellow_busy) {
-          green_yellow_busy = green_yellow_busy || {};
+      function(green_yellow_async) {
+          green_yellow_async = green_yellow_async || {};
 
-          var Module = typeof green_yellow_busy !== "undefined" ? green_yellow_busy : {};
+          var Module = typeof green_yellow_async !== "undefined" ? green_yellow_async : {};
           var readyPromiseResolve, readyPromiseReject;
           Module["ready"] = new Promise(function(resolve, reject) {
               readyPromiseResolve = resolve;
@@ -485,7 +485,7 @@ var green_yellow_busy = (function() {
           function isFileURI(filename) {
               return hasPrefix(filename, fileURIPrefix)
           }
-          var wasmBinaryFile = "green_yellow_busy.wasm";
+          var wasmBinaryFile = "green_yellow_async.wasm";
           if (!isDataURI(wasmBinaryFile)) {
               wasmBinaryFile = locateFile(wasmBinaryFile)
           }
@@ -7512,30 +7512,30 @@ var green_yellow_busy = (function() {
           }
           var asmLibraryArg = {
               "M": ___sys_fcntl64,
-              "Ta": ___sys_ioctl,
-              "Ua": ___sys_open,
-              "g": _clock_gettime,
+              "Sa": ___sys_ioctl,
+              "Ta": ___sys_open,
+              "h": _clock_gettime,
               "Fa": _dlclose,
-              "Y": _eglBindAPI,
-              "Ha": _eglChooseConfig,
-              "Jb": _eglCreateContext,
-              "dc": _eglCreateWindowSurface,
-              "Ub": _eglDestroyContext,
-              "oc": _eglDestroySurface,
-              "Ja": _eglGetConfigAttrib,
+              "pd": _eglBindAPI,
+              "Ca": _eglChooseConfig,
+              "yb": _eglCreateContext,
+              "Ub": _eglCreateWindowSurface,
+              "Jb": _eglDestroyContext,
+              "dc": _eglDestroySurface,
+              "Ha": _eglGetConfigAttrib,
               "k": _eglGetDisplay,
-              "yb": _eglGetError,
-              "ra": _eglInitialize,
-              "zc": _eglMakeCurrent,
-              "nb": _eglQueryString,
-              "Kc": _eglSwapBuffers,
-              "Vc": _eglSwapInterval,
-              "Ca": _eglTerminate,
-              "pd": _eglWaitGL,
-              "ed": _eglWaitNative,
+              "nb": _eglGetError,
+              "ga": _eglInitialize,
+              "oc": _eglMakeCurrent,
+              "cb": _eglQueryString,
+              "zc": _eglSwapBuffers,
+              "Kc": _eglSwapInterval,
+              "ra": _eglTerminate,
+              "ed": _eglWaitGL,
+              "Vc": _eglWaitNative,
               "a": _emscripten_asm_const_int,
               "Ga": _emscripten_exit_fullscreen,
-              "La": _emscripten_exit_pointerlock,
+              "Ka": _emscripten_exit_pointerlock,
               "e": _emscripten_get_device_pixel_ratio,
               "c": _emscripten_get_element_css_size,
               "n": _emscripten_get_gamepad_status,
@@ -7543,17 +7543,17 @@ var green_yellow_busy = (function() {
               "ia": _emscripten_glActiveTexture,
               "ha": _emscripten_glAttachShader,
               "za": _emscripten_glBeginQueryEXT,
-              "ga": _emscripten_glBindAttribLocation,
-              "fa": _emscripten_glBindBuffer,
-              "ea": _emscripten_glBindFramebuffer,
-              "da": _emscripten_glBindRenderbuffer,
-              "ca": _emscripten_glBindTexture,
+              "fa": _emscripten_glBindAttribLocation,
+              "ea": _emscripten_glBindBuffer,
+              "da": _emscripten_glBindFramebuffer,
+              "ca": _emscripten_glBindRenderbuffer,
+              "ba": _emscripten_glBindTexture,
               "qa": _emscripten_glBindVertexArrayOES,
-              "ba": _emscripten_glBlendColor,
-              "aa": _emscripten_glBlendEquation,
-              "$": _emscripten_glBlendEquationSeparate,
-              "_": _emscripten_glBlendFunc,
-              "Z": _emscripten_glBlendFuncSeparate,
+              "aa": _emscripten_glBlendColor,
+              "$": _emscripten_glBlendEquation,
+              "_": _emscripten_glBlendEquationSeparate,
+              "Z": _emscripten_glBlendFunc,
+              "Y": _emscripten_glBlendFuncSeparate,
               "X": _emscripten_glBufferData,
               "W": _emscripten_glBufferSubData,
               "V": _emscripten_glCheckFramebufferStatus,
@@ -7690,27 +7690,27 @@ var green_yellow_busy = (function() {
               "fb": _emscripten_glUniformMatrix4fv,
               "eb": _emscripten_glUseProgram,
               "db": _emscripten_glValidateProgram,
-              "cb": _emscripten_glVertexAttrib1f,
-              "bb": _emscripten_glVertexAttrib1fv,
-              "ab": _emscripten_glVertexAttrib2f,
-              "$a": _emscripten_glVertexAttrib2fv,
-              "_a": _emscripten_glVertexAttrib3f,
-              "Za": _emscripten_glVertexAttrib3fv,
-              "Ya": _emscripten_glVertexAttrib4f,
-              "Xa": _emscripten_glVertexAttrib4fv,
+              "bb": _emscripten_glVertexAttrib1f,
+              "ab": _emscripten_glVertexAttrib1fv,
+              "$a": _emscripten_glVertexAttrib2f,
+              "_a": _emscripten_glVertexAttrib2fv,
+              "Za": _emscripten_glVertexAttrib3f,
+              "Ya": _emscripten_glVertexAttrib3fv,
+              "Xa": _emscripten_glVertexAttrib4f,
+              "Wa": _emscripten_glVertexAttrib4fv,
               "ja": _emscripten_glVertexAttribDivisorANGLE,
-              "Wa": _emscripten_glVertexAttribPointer,
-              "Va": _emscripten_glViewport,
+              "Va": _emscripten_glVertexAttribPointer,
+              "Ua": _emscripten_glViewport,
               "j": _emscripten_has_asyncify,
-              "Na": _emscripten_memcpy_big,
+              "Ma": _emscripten_memcpy_big,
               "Ia": _emscripten_request_fullscreen_strategy,
               "K": _emscripten_request_pointerlock,
-              "Oa": _emscripten_resize_heap,
+              "Na": _emscripten_resize_heap,
               "o": _emscripten_sample_gamepad_data,
               "p": _emscripten_set_beforeunload_callback_on_thread,
               "B": _emscripten_set_blur_callback_on_thread,
               "d": _emscripten_set_canvas_element_size,
-              "h": _emscripten_set_element_css_size,
+              "i": _emscripten_set_element_css_size,
               "C": _emscripten_set_focus_callback_on_thread,
               "s": _emscripten_set_fullscreenchange_callback_on_thread,
               "m": _emscripten_set_gamepadconnected_callback_on_thread,
@@ -7732,18 +7732,18 @@ var green_yellow_busy = (function() {
               "A": _emscripten_set_touchstart_callback_on_thread,
               "q": _emscripten_set_visibilitychange_callback_on_thread,
               "D": _emscripten_set_wheel_callback_on_thread,
-              "i": _emscripten_sleep,
-              "Ra": _emscripten_thread_sleep,
-              "Pa": _environ_get,
-              "Qa": _environ_sizes_get,
+              "f": _emscripten_sleep,
+              "Qa": _emscripten_thread_sleep,
+              "Oa": _environ_get,
+              "Pa": _environ_sizes_get,
               "N": _fd_close,
-              "Sa": _fd_read,
-              "Ma": _fd_seek,
+              "Ra": _fd_read,
+              "La": _fd_seek,
               "L": _fd_write,
-              "f": _gettimeofday,
+              "g": _gettimeofday,
               "J": _setTempRet0,
               "b": _sigaction,
-              "Ka": _signal
+              "Ja": _signal
           };
           var asm = createWasm();
           var ___wasm_call_ctors = Module["___wasm_call_ctors"] = function() {
@@ -7980,15 +7980,38 @@ var green_yellow_busy = (function() {
           run();
 
 
-          return green_yellow_busy.ready
+          return green_yellow_async.ready
       }
   );
 })();
 if (typeof exports === 'object' && typeof module === 'object')
-  module.exports = green_yellow_busy;
+  module.exports = green_yellow_async;
 else if (typeof define === 'function' && define['amd'])
   define([], function() {
-      return green_yellow_busy;
+      return green_yellow_async;
   });
 else if (typeof exports === 'object')
-  exports["green_yellow_busy"] = green_yellow_busy;
+  exports["green_yellow_async"] = green_yellow_async;
+
+const fs = require('fs')
+const metering = require('wasm-metering')
+
+const wasm = fs.readFileSync('fac.wasm')
+const meteredWasm = metering.meterWASM(wasm, {
+    meterType: 'i32'
+})
+
+const limit = 90000000
+let gasUsed = 0
+
+const mod = WebAssembly.Module(meteredWasm.module)
+const instance = WebAssembly.Instance(mod, {
+    'metering': {
+    'usegas': (gas) => {
+        gasUsed += gas
+        if (gasUsed > limit) {
+        throw new Error('out of gas!')
+        }
+    }
+    }
+})

@@ -23,7 +23,7 @@ int iteration;
 void mainloop(void *arg) {
 
 // emscripten_sleep(1000);
-sleep(1);
+//sleep(1);
 
 Context *ctx = (Context *)arg;
 SDL_Renderer *renderer = ctx->renderer;
