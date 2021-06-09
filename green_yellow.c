@@ -8,6 +8,7 @@
 #include <emscripten.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <time.h>
 // This enables us to have a single point of reference
 // for the current iteration and renderer, rather than
 // have to refer to them separately.
@@ -16,14 +17,51 @@ SDL_Renderer *renderer;
 int iteration;
 } Context;
 
+// track fps
+int fpsCtr = 0;
+int start;
+int reset = 5000; // fps in 5 sec increments
+int start_policy;
+int threshold = 200;
+
+// get current time
+EM_JS(int, checkTimer, (), {
+  return Date.now()
+});
+
 /*
 * Looping function that draws a blue square on a red
 * background and moves it across the <canvas>.
 */
 void mainloop(void *arg) {
 
-// emscripten_sleep(1000);
-sleep(1);
+  emscripten_sleep(500);
+  // nanosleep((const struct timespec[]){{0, 500000000L}}, NULL);
+
+  // track fps
+  fpsCtr++;
+  // runs every reset length (5 sec?)
+  if((checkTimer() - start) > reset) {
+    printf("yellow canvas fps: %d\n", (fpsCtr / 5));
+    fpsCtr = 0;
+    start = checkTimer();
+  }
+
+// for(int i = 0; i < 10000; i++) {
+//   // if((checkTimer() - start_policy) > threshold) {
+//   //   emscripten_sleep(0);
+//   //   start_policy = checkTimer();
+//   // }
+//   for(int j = 0; j < 5000; j++) {
+//     if(i + j % 10 == 0) {
+//       EM_ASM(
+//         var d = new Date();
+//       );
+//       emscripten_sleep(0);
+//     }
+//   }
+// }
+
 
 Context *ctx = (Context *)arg;
 SDL_Renderer *renderer = ctx->renderer;
@@ -76,7 +114,10 @@ int infinite_loop = 1;
 
 // Call the function as fast as the browser wants to render
 // (typically 60fps):
-int fps = -1;
+int fps = 60;
+
+start = checkTimer();
+start_policy = checkTimer();
 
 // This is a function from emscripten.h, it sets a C function
 // as the main event loop for the calling thread:

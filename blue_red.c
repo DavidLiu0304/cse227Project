@@ -7,6 +7,7 @@
 #include <SDL2/SDL.h>
 #include <emscripten.h>
 #include <stdlib.h>
+
 // This enables us to have a single point of reference
 // for the current iteration and renderer, rather than
 // have to refer to them separately.
@@ -15,13 +16,32 @@ SDL_Renderer *renderer;
 int iteration;
 } Context;
 
+// track fps
+int fpsCtr = 0;
+int start;
+int reset = 5000; // fps in 5 sec increments
+
+// get current time
+EM_JS(int, checkTimer, (), {
+  return Date.now()
+});
+
 /*
 * Looping function that draws a blue square on a red
 * background and moves it across the <canvas>.
 */
 void mainloop(void *arg) {
 
-emscripten_sleep(1);
+emscripten_sleep(0);
+
+// track fps
+fpsCtr++;
+// runs every reset length (5 sec?)
+if((checkTimer() - start) > reset) {
+  printf("red canvas fps: %d\n", (fpsCtr / 5));
+  fpsCtr = 0;
+  start = checkTimer();
+}
 
 Context *ctx = (Context *)arg;
 SDL_Renderer *renderer = ctx->renderer;
@@ -44,6 +64,7 @@ SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
 SDL_RenderFillRect(renderer, &rect);
 
 SDL_RenderPresent(renderer);
+
 
 // This resets the counter to 0 as soon as the iteration
 // hits the maximum canvas dimension (otherwise you'd
@@ -74,7 +95,9 @@ int infinite_loop = 1;
 
 // Call the function as fast as the browser wants to render
 // (typically 60fps):
-int fps = -1;
+int fps = 60;
+
+start = checkTimer();
 
 // This is a function from emscripten.h, it sets a C function
 // as the main event loop for the calling thread:
